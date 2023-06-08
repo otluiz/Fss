@@ -1,8 +1,14 @@
+/*
+ * Diretiva para compilar
+ * g++ fss_7.cpp -L/usr/lib -lboost_filesystem -lboost_system -lboost_iostreams
+ */
+
 #include <iostream>
 #include <cmath>
 #include <cstdlib>
 #include <ctime>
 #include "gnuplot-iostream.h" // Include the gnuplot-iostream header
+
 
 using namespace std;
 
@@ -80,7 +86,7 @@ Fish updateSchool(Fish school[NUM_FISH]) {
         school[i].velocity[1] += COEFF_SOCIAL * (school[j].position[1] - school[i].position[1]) / school[j].weight;
       }
     }
-    school[i] = updateFish(school[i]);
+    updateFish(school[i]);
   }
   return *school;
 }
@@ -114,7 +120,7 @@ int main() {
   // Main loop
   for (int iter = 0; iter < NUM_ITERATIONS; iter++) {
     // Update the fish school
-    school = updateSchool(school);
+    updateSchool(school);
 
     // Plot the fish positions
     gp << "plot '-' with points pointtype 7 pointsize 1.5 lc variable\n";
